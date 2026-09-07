@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketlym & Cleberson | 26 de Setembro de 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0a1330;
+    --navy:#0d1b3e;
+    --navy-light:#16295c;
+    --gold:#c9a24b;
+    --gold-light:#e3c988;
+    --cream:#f4efe2;
+    --ink:#e8e6db;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--navy-deep);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .label{
+    font-family:'Tenor Sans', sans-serif;
+    letter-spacing:0.28em;
+    font-size:12.5px;
+    color:var(--gold-light);
+  }
+
+  a{color:inherit;}
+
+  /* ---------- Ornament pieces (SVG, drawn to echo the invitation's line flourishes) ---------- */
+  .flourish{
+    display:block;
+    margin:0 auto;
+    opacity:0.9;
+  }
+
+  /* ---------- Page frame ---------- */
+  .sheet{
+    max-width:640px;
+    margin:0 auto;
+    position:relative;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201,162,75,0.10), transparent 60%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    overflow:hidden;
+  }
+
+  .sheet::before{
+    content:"";
+    position:absolute;
+    inset:14px;
+    border:1px solid rgba(201,162,75,0.35);
+    pointer-events:none;
+    z-index:5;
+  }
+
+  .corner{
+    position:absolute;
+    width:64px;
+    height:64px;
+    border:1px solid rgba(201,162,75,0.55);
+    z-index:6;
+    pointer-events:none;
+  }
+  .corner.tl{top:22px; left:22px; border-right:none; border-bottom:none;}
+  .corner.tr{top:22px; right:22px; border-left:none; border-bottom:none;}
+  .corner.bl{bottom:22px; left:22px; border-right:none; border-top:none;}
+  .corner.br{bottom:22px; right:22px; border-left:none; border-top:none;}
+
+  section{
+    position:relative;
+    padding:56px 44px;
+    text-align:center;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:22px auto;
+    max-width:220px;
+  }
+  .divider::before, .divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(201,162,75,0.6));
+  }
+  .divider::after{background:linear-gradient(90deg, rgba(201,162,75,0.6), transparent);}
+  .divider svg{flex-shrink:0;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding-top:64px;}
+
+  .hero .kicker{
+    margin-bottom:14px;
+  }
+
+  .hero h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:34px;
+    letter-spacing:0.12em;
+    color:var(--gold-light);
+    text-transform:uppercase;
+  }
+
+  .names{
+    margin:28px 0 8px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:64px;
+    line-height:1.15;
+    color:var(--gold);
+    text-shadow:0 0 26px rgba(201,162,75,0.18);
+  }
+  .names .amp{
+    display:block;
+    font-size:36px;
+    font-style:normal;
+    color:var(--ink);
+    opacity:0.75;
+    margin:6px 0;
+  }
+
+  .intro{
+    max-width:400px;
+    margin:26px auto 0;
+    font-size:19px;
+    color:rgba(232,230,219,0.88);
+  }
+
+  /* ---------- Details ---------- */
+  .details{padding-top:36px;}
+
+  .detail-row{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    text-align:left;
+    max-width:420px;
+    margin:0 auto 26px;
+  }
+  .detail-row:last-child{margin-bottom:0;}
+
+  .detail-icon{
+    flex-shrink:0;
+    width:44px;
+    height:44px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .detail-text .label{display:block; margin-bottom:3px;}
+  .detail-text .value{font-size:19px; color:var(--ink);}
+  .detail-text .value.small{font-size:17px; opacity:0.85;}
+
+  /* ---------- Verse ---------- */
+  .verse{padding-top:20px;}
+  .verse .ref{
+    font-family:'Tenor Sans', sans-serif;
+    letter-spacing:0.1em;
+    color:var(--gold);
+    font-size:15px;
+    margin-bottom:10px;
+  }
+  .verse p{
+    font-style:italic;
+    font-size:20px;
+    max-width:340px;
+    margin:0 auto;
+    color:rgba(232,230,219,0.92);
+  }
+  .verse .hearts{margin-top:20px; color:var(--gold); font-size:15px; letter-spacing:0.3em;}
+
+  /* ---------- Gift / Pix section ---------- */
+  .gift{
+    background:linear-gradient(180deg, rgba(201,162,75,0.05), transparent);
+    border-top:1px solid rgba(201,162,75,0.25);
+    border-bottom:1px solid rgba(201,162,75,0.25);
+  }
+
+  .gift h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:29px;
+    color:var(--gold-light);
+  }
+
+  .gift .lede{
+    max-width:400px;
+    margin:16px auto 34px;
+    font-size:18px;
+    color:rgba(232,230,219,0.85);
+  }
+
+  .amount-grid{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:8px;
+  }
+
+  .amount-btn{
+    font-family:'Tenor Sans', sans-serif;
+    font-size:16px;
+    letter-spacing:0.05em;
+    background:transparent;
+    color:var(--gold-light);
+    border:1px solid rgba(201,162,75,0.55);
+    padding:16px 26px;
+    cursor:pointer;
+    transition:background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    min-width:110px;
+  }
+  .amount-btn:hover{
+    border-color:var(--gold);
+    background:rgba(201,162,75,0.08);
+  }
+  .amount-btn.selected{
+    background:var(--gold);
+    color:var(--navy-deep);
+    border-color:var(--gold);
+    font-weight:600;
+  }
+
+  .custom-toggle{
+    margin-top:18px;
+    font-size:15.5px;
+  }
+  .custom-toggle button{
+    background:none;
+    border:none;
+    color:rgba(232,230,219,0.6);
+    font-family:'Tenor Sans', sans-serif;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-decoration:underline;
+    text-underline-offset:4px;
+    cursor:pointer;
+  }
+  .custom-toggle button:hover{color:var(--gold-light);}
+
+  #custom-wrap{
+    display:none;
+    margin-top:18px;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+  }
+  #custom-wrap.show{display:flex;}
+  #custom-value{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(201,162,75,0.4);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    padding:10px 14px;
+    width:140px;
+    text-align:center;
+  }
+  #custom-value:focus{outline:none; border-color:var(--gold);}
+  #custom-confirm{
+    font-family:'Tenor Sans', sans-serif;
+    font-size:13px;
+    letter-spacing:0.05em;
+    background:var(--gold);
+    color:var(--navy-deep);
+    border:none;
+    padding:11px 18px;
+    cursor:pointer;
+  }
+
+  .loading-panel{
+    display:none;
+    margin-top:34px;
+    align-items:center;
+    flex-direction:column;
+    gap:14px;
+  }
+  .loading-panel.show{display:flex;}
+  .loading-panel p{
+    font-family:'Tenor Sans', sans-serif;
+    font-size:13px;
+    letter-spacing:0.06em;
+    color:rgba(232,230,219,0.6);
+  }
+  .spinner{
+    width:26px;
+    height:26px;
+    border:2px solid rgba(201,162,75,0.25);
+    border-top-color:var(--gold);
+    border-radius:50%;
+    animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .error-panel{
+    display:none;
+    margin-top:30px;
+    max-width:380px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:16px 18px;
+    border:1px solid rgba(192,57,43,0.5);
+    background:rgba(192,57,43,0.08);
+  }
+  .error-panel.show{display:block;}
+  .error-panel p{font-size:16px; color:#e8b4ac;}
+
+  .status-line{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    margin-top:22px;
+    font-family:'Tenor Sans', sans-serif;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    color:rgba(232,230,219,0.6);
+  }
+  .status-line .dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--gold);
+    animation:pulse-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot{
+    0%, 100%{opacity:0.35;}
+    50%{opacity:1;}
+  }
+  .status-line.confirmed .dot{
+    background:#4caf7d;
+    animation:none;
+    opacity:1;
+  }
+
+  .qr-panel{
+    display:none;
+    margin-top:38px;
+  }
+  .qr-panel.show{display:block; animation:reveal 0.5s ease;}
+  #qr-image{width:200px; height:200px; display:block;}
+
+  @keyframes reveal{
+    from{opacity:0; transform:translateY(8px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .qr-frame{
+    display:inline-block;
+    background:var(--cream);
+    padding:18px;
+    border:1px solid var(--gold);
+  }
+  #qrcode{line-height:0;}
+
+  .qr-amount{
+    margin-top:16px;
+    font-size:17px;
+    color:rgba(232,230,219,0.75);
+  }
+  .qr-amount strong{color:var(--gold-light); font-size:22px;}
+
+  .copia-cola{
+    max-width:420px;
+    margin:22px auto 0;
+    text-align:left;
+  }
+  .copia-cola .label{display:block; margin-bottom:8px; text-align:center;}
+  .copia-cola-box{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(201,162,75,0.35);
+    padding:12px 14px;
+    font-family:'Tenor Sans', sans-serif;
+    font-size:11.5px;
+    color:rgba(232,230,219,0.7);
+    word-break:break-all;
+    line-height:1.5;
+  }
+
+  .btn-row{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+
+  .btn{
+    font-family:'Tenor Sans', sans-serif;
+    font-size:13.5px;
+    letter-spacing:0.06em;
+    padding:13px 22px;
+    cursor:pointer;
+    border:1px solid var(--gold);
+    background:transparent;
+    color:var(--gold-light);
+    transition:background 0.25s ease, color 0.25s ease;
+  }
+  .btn:hover{background:rgba(201,162,75,0.1);}
+  .btn.primary{
+    background:var(--gold);
+    color:var(--navy-deep);
+    font-weight:600;
+  }
+  .btn.primary:hover{background:var(--gold-light);}
+
+  .confirm-panel{
+    display:none;
+    margin-top:30px;
+    padding-top:28px;
+    border-top:1px solid rgba(201,162,75,0.25);
+  }
+  .confirm-panel.show{display:block; animation:reveal 0.5s ease;}
+  .confirm-panel .thanks-icon{color:var(--gold); font-size:26px; margin-bottom:14px;}
+  .confirm-panel p{
+    max-width:360px;
+    margin:0 auto;
+    font-size:19px;
+    font-style:italic;
+    color:rgba(232,230,219,0.92);
+  }
+
+  .note{
+    margin-top:16px;
+    font-size:13px;
+    color:rgba(232,230,219,0.4);
+    font-family:'Tenor Sans', sans-serif;
+    letter-spacing:0.02em;
+    max-width:380px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:40px 44px 60px;
+    text-align:center;
+  }
+  footer .sign{
+    font-style:italic;
+    font-size:22px;
+    color:var(--gold-light);
+  }
+  footer .tiny{
+    margin-top:10px;
+    font-family:'Tenor Sans', sans-serif;
+    font-size:12px;
+    letter-spacing:0.15em;
+    color:rgba(232,230,219,0.35);
+  }
+
+  @media (max-width:480px){
+    section{padding:44px 24px;}
+    .names{font-size:48px;}
+    .hero h1{font-size:26px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="flourish" width="140" height="34" viewBox="0 0 140 34" fill="none">
+      <path d="M10 17 C 40 2, 55 2, 70 17 C 85 32, 100 32, 130 17" stroke="#c9a24b" stroke-width="1"/>
+      <circle cx="70" cy="17" r="2.5" fill="#c9a24b"/>
+    </svg>
+    <p class="label kicker">CONVITE DE CASAMENTO</p>
+    <h1>Casamento</h1>
+    <div class="names">
+      Ketlym
+      <span class="amp">&amp;</span>
+      Cleberson
+    </div>
+    <div class="divider">
+      <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 0 L7.5 4.5 L12 6 L7.5 7.5 L6 12 L4.5 7.5 L0 6 L4.5 4.5 Z" fill="#c9a24b"/></svg>
+    </div>
+    <p class="intro">Com muita alegria convidamos você para celebrar este momento tão especial em nossas vidas.</p>
+  </section>
+
+  <!-- DETALHES -->
+  <section class="details">
+    <div class="detail-row">
+      <div class="detail-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="1.5"/><path d="M3 9.5H21"/><path d="M8 3V6"/><path d="M16 3V6"/></svg>
+      </div>
+      <div class="detail-text">
+        <span class="label">DATA</span>
+        <span class="value">26 de setembro de 2026</span>
+      </div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7V12L15.5 14"/></svg>
+      </div>
+      <div class="detail-text">
+        <span class="label">HORÁRIO</span>
+        <span class="value">19 horas</span>
+      </div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="1.4"><path d="M12 21C12 21 5 14.5 5 9.5C5 5.9 8.1 3 12 3C15.9 3 19 5.9 19 9.5C19 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      </div>
+      <div class="detail-text">
+        <span class="label">LOCAL</span>
+        <span class="value small">Rua Napoleão Teixeira de Macêdo, 85 — Afogados<br>(próximo à Igreja Maranata)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERSÍCULO -->
+  <section class="verse">
+    <div class="divider">
+      <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 0 L7.5 4.5 L12 6 L7.5 7.5 L6 12 L4.5 7.5 L0 6 L4.5 4.5 Z" fill="#c9a24b"/></svg>
+    </div>
+    <p class="ref">Mateus 19.6</p>
+    <p>"Portanto, o que Deus uniu, o homem não separe."</p>
+    <div class="hearts">♡ ♡</div>
+  </section>
+
+  <!-- PRESENTE / PIX -->
+  <section class="gift" id="presentear">
+    <h2>Um carinho para o novo lar</h2>
+    <p class="lede">Sua presença já é o presente mais importante. Se quiser nos ajudar a começar essa nova fase, pode contribuir com um valor via Pix, direto por aqui.</p>
+
+    <div class="amount-grid" id="amount-grid">
+      <button class="amount-btn" data-value="20">R$ 20</button>
+      <button class="amount-btn" data-value="50">R$ 50</button>
+      <button class="amount-btn" data-value="100">R$ 100</button>
+    </div>
+
+    <div class="custom-toggle">
+      <button id="toggle-custom">quero contribuir com outro valor</button>
+    </div>
+    <div id="custom-wrap">
+      <input type="number" id="custom-value" placeholder="R$ 0,00" min="1" step="0.01">
+      <button id="custom-confirm">Gerar QR Code</button>
+    </div>
+
+    <div class="loading-panel" id="loading-panel">
+      <div class="spinner"></div>
+      <p>Gerando cobrança Pix...</p>
+    </div>
+
+    <div class="error-panel" id="error-panel">
+      <p id="error-text">Não foi possível gerar o Pix agora. Tente novamente em instantes.</p>
+    </div>
+
+    <div class="qr-panel" id="qr-panel">
+      <div class="qr-frame">
+        <img id="qr-image" src="" alt="QR Code Pix">
+      </div>
+      <p class="qr-amount">Valor selecionado: <strong id="qr-amount-display">R$ 0,00</strong></p>
+
+      <div class="copia-cola">
+        <span class="label">PIX COPIA E COLA</span>
+        <div class="copia-cola-box" id="pix-payload">—</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn" id="copy-btn">Copiar código Pix</button>
+      </div>
+
+      <div class="status-line" id="status-line">
+        <span class="dot"></span>
+        <span id="status-text">Aguardando pagamento — confirmamos automaticamente assim que cair</span>
+      </div>
+
+      <p class="note">O QR Code já vem com o valor preenchido. Depois de pagar no app do seu banco, esta página confirma sozinha em poucos segundos — não precisa avisar a gente.</p>
+    </div>
+
+    <div class="confirm-panel" id="confirm-panel">
+      <div class="thanks-icon">♡</div>
+      <p>Muito obrigado pelo carinho! Seu presente vai ajudar a construir o começo da nossa história juntos. Nos vemos no dia 26 de setembro — mal podemos esperar para celebrar com você.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="sign">Ketlym &amp; Cleberson</p>
+    <p class="tiny">SUA PRESENÇA TORNARÁ ESSE DIA AINDA MAIS INESQUECÍVEL</p>
+  </footer>
+</div>
+
+<script>
+  // Como o backend roda no mesmo domínio (Vercel), a chamada é sempre relativa.
+  const API_BASE = "";
+
+  const amountButtons = document.querySelectorAll(".amount-btn");
+  const loadingPanel = document.getElementById("loading-panel");
+  const errorPanel = document.getElementById("error-panel");
+  const errorText = document.getElementById("error-text");
+  const qrPanel = document.getElementById("qr-panel");
+  const confirmPanel = document.getElementById("confirm-panel");
+  const qrAmountDisplay = document.getElementById("qr-amount-display");
+  const pixPayloadBox = document.getElementById("pix-payload");
+  const qrImage = document.getElementById("qr-image");
+  const statusLine = document.getElementById("status-line");
+  const statusText = document.getElementById("status-text");
+
+  let pollTimer = null;
+
+  function pararPolling() {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  }
+
+  function mostrarErro(msg) {
+    pararPolling();
+    loadingPanel.classList.remove("show");
+    qrPanel.classList.remove("show");
+    errorText.textContent = msg;
+    errorPanel.classList.add("show");
+  }
+
+  async function selecionarValor(valor, btnAtivo) {
+    amountButtons.forEach(b => b.classList.remove("selected"));
+    if (btnAtivo) btnAtivo.classList.add("selected");
+
+    pararPolling();
+    confirmPanel.classList.remove("show");
+    qrPanel.classList.remove("show");
+    errorPanel.classList.remove("show");
+    statusLine.classList.remove("confirmed");
+    statusText.textContent = "Aguardando pagamento — confirmamos automaticamente assim que cair";
+    loadingPanel.classList.add("show");
+    loadingPanel.scrollIntoView({behavior: "smooth", block: "nearest"});
+
+    try {
+      const resp = await fetch(`${API_BASE}/api/create-payment`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({amount: Number(valor)})
+      });
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        throw new Error(data.error || "Não foi possível gerar o Pix");
+      }
+
+      loadingPanel.classList.remove("show");
+      qrAmountDisplay.textContent = "R$ " + Number(valor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+      pixPayloadBox.textContent = data.qr_code;
+      qrImage.src = "data:image/png;base64," + data.qr_code_base64;
+      qrPanel.classList.add("show");
+      qrPanel.scrollIntoView({behavior: "smooth", block: "nearest"});
+
+      iniciarPolling(data.id);
+    } catch (err) {
+      mostrarErro(err.message || "Não foi possível gerar o Pix agora. Tente novamente em instantes.");
+    }
+  }
+
+  function iniciarPolling(paymentId) {
+    pararPolling();
+    pollTimer = setInterval(async () => {
+      try {
+        const resp = await fetch(`${API_BASE}/api/check-payment?id=${paymentId}`);
+        const data = await resp.json();
+        if (data.status === "approved") {
+          pararPolling();
+          statusLine.classList.add("confirmed");
+          statusText.textContent = "Pagamento confirmado!";
+          confirmPanel.classList.add("show");
+          confirmPanel.scrollIntoView({behavior: "smooth", block: "nearest"});
+        } else if (data.status === "rejected" || data.status === "cancelled") {
+          pararPolling();
+          statusText.textContent = "Pagamento não concluído — gere um novo Pix se quiser tentar de novo";
+        }
+      } catch (err) {
+        // silencioso: só tenta de novo no próximo ciclo
+      }
+    }, 3000);
+  }
+
+  amountButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      selecionarValor(btn.dataset.value, btn);
+    });
+  });
+
+  const toggleCustom = document.getElementById("toggle-custom");
+  const customWrap = document.getElementById("custom-wrap");
+  const customValue = document.getElementById("custom-value");
+  const customConfirm = document.getElementById("custom-confirm");
+
+  toggleCustom.addEventListener("click", () => {
+    customWrap.classList.toggle("show");
+    if (customWrap.classList.contains("show")) customValue.focus();
+  });
+
+  customConfirm.addEventListener("click", () => {
+    const v = parseFloat(customValue.value);
+    if (!v || v <= 0) {
+      customValue.style.borderColor = "#c0392b";
+      return;
+    }
+    customValue.style.borderColor = "";
+    amountButtons.forEach(b => b.classList.remove("selected"));
+    selecionarValor(v.toFixed(2), null);
+  });
+
+  document.getElementById("copy-btn").addEventListener("click", () => {
+    navigator.clipboard.writeText(pixPayloadBox.textContent).then(() => {
+      const btn = document.getElementById("copy-btn");
+      const original = btn.textContent;
+      btn.textContent = "Código copiado!";
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    });
+  });
+</script>
+
+</body>
+</html>
